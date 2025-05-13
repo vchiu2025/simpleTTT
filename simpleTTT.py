@@ -8,7 +8,7 @@ from constants import Player
 
 
 class Board:
-    "Represents the classic 3x3 Tic Tac Toe Board"
+    # Represents the classic 3x3 Tic Tac Toe Board
 
     def __init__(self):
         self.player: str = Player.FIRST
@@ -36,17 +36,23 @@ class Board:
 
     def make_move(self, x_coordinate: int, y_coordinate: int, player: str) -> None:
         self.board[x_coordinate][y_coordinate] = player
-        print(self)
         self.num_moves += 1
+        self.possible_moves.remove([x_coordinate, y_coordinate])
+
+    def undo_move(self, x_coordinate: int, y_coordinate: int) -> None:
+        if self.board[x_coordinate][y_coordinate] is not None:
+            self.board[x_coordinate][y_coordinate] = None
+            self.num_moves -= 1
+            self.is_game_over = False
+            self.winner = None
+            self.possible_moves.append([x_coordinate, y_coordinate])
+            self.switch_players()
 
     def end_game_win(self) -> None:
-        winning_message = f"GOOD JOB, {self.player} WINS!"
-        print(winning_message)
         self.winner = self.player
         self.is_game_over = True
 
     def end_game_draw(self) -> None:
-        print(DRAW_MESSAGE)
         self.is_game_over = True
 
     def is_move_invalid(self, x_coordinate: int, y_coordinate: int) -> bool:
@@ -94,5 +100,4 @@ class Board:
     def reset(self) -> None:
         self.board: str = [[None for _ in range(self.cols)] for _ in range(self.rows)]
         self.num_moves = 0
-        print(self)
         self.possible_moves = POSSIBLE_MOVES[:]

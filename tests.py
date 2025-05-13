@@ -103,6 +103,30 @@ class TestFunction(unittest.TestCase):
         self.assertEqual(draw.winner, None)
         self.assertTrue(draw.is_game_over)
 
+    def test_undo_function(self):
+        undo = Board()
+        undo.move(1, 1, undo.player)
+        undo.undo_move(1, 1)
+        self.assertEqual(
+            undo.board,
+            [[None, None, None], [None, None, None], [None, None, None]],
+        )
+        self.assertEqual(undo.num_moves, 0)
+        self.assertEqual(
+            sorted(undo.possible_moves),
+            [
+                [0, 0],
+                [0, 1],
+                [0, 2],
+                [1, 0],
+                [1, 1],
+                [1, 2],
+                [2, 0],
+                [2, 1],
+                [2, 2],
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
