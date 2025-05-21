@@ -1,5 +1,4 @@
-from simpleTTT import Board
-from run_game import play_dumb_bot, play_smart_bot, play_pvp
+from GameMode import DumbBotGame, SmartBotGame, PvPGame
 from constants import (
     HEADER,
     OPENING_CHOICES,
@@ -8,6 +7,8 @@ from constants import (
     INVALID_OPENING_CHOICE,
     OPENING_CHOICE_PROMPT,
     AIBOT_CHOICE_PROMPT,
+    NOW_PLAYING_DUMB_BOT,
+    NOW_PLAYING_SMART_BOT
 )
 from constants import UserChoosesTo
 
@@ -20,14 +21,16 @@ def main():
         if choice == UserChoosesTo.PLAY_AI:
             play_dumb_or_smart = input(AIBOT_CHOICE_PROMPT)
             if play_dumb_or_smart == UserChoosesTo.PLAY_DUMB_BOT:
-                play_dumb_bot()
+                print(NOW_PLAYING_DUMB_BOT)
+                DumbBotGame().play()
             elif play_dumb_or_smart == UserChoosesTo.PLAY_SMART_BOT:
-                play_smart_bot()
+                print(NOW_PLAYING_SMART_BOT)
+                SmartBotGame().play()
             else:
                 print(INVALID_AIBOT_CHOICE)
 
         elif choice == UserChoosesTo.PLAY_PVP:
-            play_pvp()
+            PvPGame().play()
         elif choice == UserChoosesTo.EXIT:
             print(EXITING_MESSAGE)
             break

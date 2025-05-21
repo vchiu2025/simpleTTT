@@ -1,10 +1,5 @@
 from simpleTTT import Board
 import unittest
-from constants import (
-    INVALID_MOVE_MESSAGE,
-    TAKEN_SQUARE_MESSAGE,
-    DRAW_MESSAGE,
-)
 from constants import Player
 
 

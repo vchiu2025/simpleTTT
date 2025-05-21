@@ -1,7 +1,6 @@
 from constants import (
     INVALID_MOVE_MESSAGE,
     TAKEN_SQUARE_MESSAGE,
-    DRAW_MESSAGE,
     POSSIBLE_MOVES,
 )
 from constants import Player
